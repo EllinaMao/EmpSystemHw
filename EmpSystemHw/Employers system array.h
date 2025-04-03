@@ -3,11 +3,12 @@
 
 
 struct EmployersArray {
-	EmployeTemp* all_empl;
+	EmployeTemp** all_empl = nullptr;
+	int employers_count = 0;
 };
 
 
-void AddEmploye(EmployersArray& empls, EmployeTemp& empl);
+void AddEmploye(EmployersArray& empls, EmployeTemp* empl);
 void DeleteEmploye(EmployersArray& empls);
 void ChangeEmployeName(EmployersArray& empls, EmployeTemp& empl);
 void ChangeEmployeSurname(EmployersArray& empls, EmployeTemp& empl);
