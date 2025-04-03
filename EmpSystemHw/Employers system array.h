@@ -11,6 +11,7 @@ struct EmployersArray {
 void AddEmploye(EmployersArray& empls, EmployeTemp* empl);
 void DeleteEmployeByIndex(EmployersArray& empls, int index);
 void ShowAllEmployers(EmployersArray& empls);
+void ShowEmployeByIndex(EmployersArray& empls, int index);
 
 void ChangeEmployeNameByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
 void ChangeEmployeSurnameByIndex(EmployersArray& empls, EmployeTemp& empl, int index);

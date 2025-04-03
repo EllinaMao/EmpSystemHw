@@ -47,3 +47,49 @@ void ShowAllEmployers(EmployersArray& empls)
         ShowEmploye(*empls.all_empl[i]);
     }
 }
+
+void ShowEmployeByIndex(EmployersArray& empls, int index) {
+    if (index >= empls.employers_count || index < 0 || !empls.all_empl) {
+        return;
+    }
+    ShowEmploye(*empls.all_empl[index]);
+}
+void ChangeEmployeNameByIndex(EmployersArray& empls, EmployeTemp& empl, int index)
+{
+    if (index >= empls.employers_count || index < 0 || !empls.all_empl) {
+        return;
+    }
+
+    cout << "Enter new name" << endl;
+    EnterName(empl);
+
+    delete[] empls.all_empl[index]->name;
+    empls.all_empl[index]->name = new char[empl.namesize];
+    strcpy_s(empls.all_empl[index]->name, empl.namesize, empl.name);  
+    }
+
+void ChangeEmployeSurnameByIndex(EmployersArray& empls, EmployeTemp& empl, int index)
+{
+    if (index >= empls.employers_count || index < 0 || !empls.all_empl) {
+        return;
+    }
+
+    cout << "Enter new surname" << endl;
+    EnterSurname(empl);
+
+    delete[] empls.all_empl[index]->surname;
+    empls.all_empl[index]->surname = new char[empl.surnamesize];
+    strcpy_s(empls.all_empl[index]->surname, empl.surnamesize, empl.surname);
+}
+
+void ChangeEmployeAgeByIndex(EmployersArray& empls, EmployeTemp& empl, int index)  
+{  
+   if (index >= empls.employers_count || index < 0 || !empls.all_empl) {  
+       return;  
+   }  
+
+   cout << "Enter new age" << endl;  
+   EnterAge(empl);  
+
+   empls.all_empl[index]->age = empl.age;  
+}
