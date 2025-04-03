@@ -3,15 +3,19 @@
 
 
 struct EmployersArray {
-	EmployeTemp* all_empl;
+	EmployeTemp** all_empl = nullptr;
+	int employers_count = 0;
 };
 
 
-void AddEmploye(EmployersArray& empls, EmployeTemp& empl);
-void DeleteEmploye(EmployersArray& empls);
-void ChangeEmployeName(EmployersArray& empls, EmployeTemp& empl);
-void ChangeEmployeSurname(EmployersArray& empls, EmployeTemp& empl);
-void ChangeEmployeAge(EmployersArray& empls, EmployeTemp& empl);
+void AddEmploye(EmployersArray& empls, EmployeTemp* empl);
+void DeleteEmployeByIndex(EmployersArray& empls, int index);
+void ShowAllEmployers(EmployersArray& empls);
+void ShowEmployeByIndex(EmployersArray& empls, int index);
+
+void ChangeEmployeNameByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
+void ChangeEmployeSurnameByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
+void ChangeEmployeAgeByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
 
 
 void SaveInFile(EmployersArray& empls);

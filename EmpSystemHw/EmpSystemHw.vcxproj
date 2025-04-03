@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Employers system array.cpp" />
     <ClCompile Include="Employers.cpp" />
     <ClCompile Include="EmpSystemHw.cpp" />
   </ItemGroup>

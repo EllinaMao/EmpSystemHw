@@ -16,7 +16,6 @@ struct EmployeSavesArr{
 
 void FindEmployeSurname(EmployersArray& empls, EmployeTemp& empl);
 
-void ShowAllEmployers(EmployersArray& empls);
 void ShowEmployersGivenAge(EmployersArray& empls);
 void ShowEmployersBySurnameLetter(EmployersArray& empls);
 
