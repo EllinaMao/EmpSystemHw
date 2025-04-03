@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Employers.cpp" />
     <ClCompile Include="EmpSystemHw.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Employers system array.h" />
+    <ClInclude Include="Employers.h" />
+    <ClInclude Include="FindEmployers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
