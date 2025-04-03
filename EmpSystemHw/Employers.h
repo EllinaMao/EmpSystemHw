@@ -21,4 +21,4 @@ void EnterName(EmployeTemp& et);
 void EnterSurname(EmployeTemp& et);
 void EnterAge(EmployeTemp& et);
 
-
+void ShowEmploye(EmployeTemp& et);

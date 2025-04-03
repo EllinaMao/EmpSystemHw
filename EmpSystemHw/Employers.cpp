@@ -67,3 +67,11 @@ void EnterAge(EmployeTemp& et)
 	cin >> et.age;
 	if (cin.fail()) { cin.clear(); cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); }
 }
+
+void ShowEmploye(EmployeTemp& et)
+{
+	cout << "Name" <<et.name<< endl;
+	cout << "Surname" << et.surname << endl;
+	cout << "Age" << et.age << endl;
+
+}

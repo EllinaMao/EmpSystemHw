@@ -9,10 +9,12 @@ struct EmployersArray {
 
 
 void AddEmploye(EmployersArray& empls, EmployeTemp* empl);
-void DeleteEmploye(EmployersArray& empls);
-void ChangeEmployeName(EmployersArray& empls, EmployeTemp& empl);
-void ChangeEmployeSurname(EmployersArray& empls, EmployeTemp& empl);
-void ChangeEmployeAge(EmployersArray& empls, EmployeTemp& empl);
+void DeleteEmployeByIndex(EmployersArray& empls, int index);
+void ShowAllEmployers(EmployersArray& empls);
+
+void ChangeEmployeNameByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
+void ChangeEmployeSurnameByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
+void ChangeEmployeAgeByIndex(EmployersArray& empls, EmployeTemp& empl, int index);
 
 
 void SaveInFile(EmployersArray& empls);
