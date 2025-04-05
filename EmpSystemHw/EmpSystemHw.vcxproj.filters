@@ -21,6 +21,12 @@
     <ClCompile Include="Employers.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Employers system array.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FindEmployers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Employers system array.h">

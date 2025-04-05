@@ -8,11 +8,10 @@
 Организуйте возможность сохранения найденной информации в файл.
 */
 
-struct EmployeSavesArr{
-	char* savefile;
-	char** saveallfiles;
+struct FoundedeEmp {
+	EmployeTemp** all_empl = nullptr;
+	int employers_count = 0;
 };
-
 
 void FindEmployeSurname(EmployersArray& empls, EmployeTemp& empl);
 
@@ -20,4 +19,4 @@ void ShowEmployersGivenAge(EmployersArray& empls);
 void ShowEmployersBySurnameLetter(EmployersArray& empls);
 
 
-void SaveFoundedInfo(EmployersArray& empls);
+void SaveFoundedInfo(FoundedeEmp& empls);

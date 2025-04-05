@@ -130,6 +130,7 @@
     <ClCompile Include="Employers system array.cpp" />
     <ClCompile Include="Employers.cpp" />
     <ClCompile Include="EmpSystemHw.cpp" />
+    <ClCompile Include="FindEmployers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Employers system array.h" />
