@@ -156,7 +156,8 @@ void DeleteFoundedEmp(FoundedeEmp& fe)
         fe.all_empl = nullptr;
     }
     if (fe.emp_id) {
-    fe.emp_id = nullptr;
+        delete[] fe.emp_id;
+        fe.emp_id = nullptr;
     }
     fe.employers_count = 0;
 }
