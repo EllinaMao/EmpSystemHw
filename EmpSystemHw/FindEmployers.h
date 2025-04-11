@@ -13,10 +13,10 @@ struct FoundedeEmp {
 	int employers_count = 0;
 };
 
-void FindEmployeSurname(EmployersArray& empls, EmployeTemp& empl);
+void FindEmployeSurname(EmployersArray& empls, EmployeTemp& empl, FoundedeEmp&fe);
 
-void ShowEmployersGivenAge(EmployersArray& empls);
-void ShowEmployersBySurnameLetter(EmployersArray& empls);
+void ShowEmployersGivenAge(EmployersArray& empls, FoundedeEmp& fe);
+void ShowEmployersBySurnameLetter(EmployersArray& empls, FoundedeEmp& fe);
 
 
 void SaveFoundedInfo(FoundedeEmp& empls);
