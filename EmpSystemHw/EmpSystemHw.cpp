@@ -40,8 +40,8 @@ int main()
 
         else if (task == 2) {
             cout << "Enter your file name" << endl;
-            //EnterFilename(emplarr);
-            SetTestFilename(emplarr);//for tests
+            EnterFilename(emplarr);
+            //SetTestFilename(emplarr);//for tests
             LoadFromFile(emplarr);
             break;
         }
