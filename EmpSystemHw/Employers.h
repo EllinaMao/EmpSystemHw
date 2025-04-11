@@ -7,11 +7,9 @@ using namespace std;
 
 struct EmployeTemp {
 
-	int age;
-	int namesize = 0;
-	int surnamesize = 0;
-	char* surname;
-	char* name;
+	int age = 0;
+	char* surname = nullptr;
+	char* name = nullptr;
 };
 
 
