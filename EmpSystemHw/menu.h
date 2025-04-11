@@ -10,3 +10,5 @@ void MenuChange();
 void MenuShow();
 
 int GetNumber();
+
+void MenuFound();

@@ -16,8 +16,12 @@ struct FoundedeEmp {
 
 void FindEmployeSurname(EmployersArray& empls, EmployeTemp& empl, FoundedeEmp&fe);
 
-void ShowEmployersGivenAge(EmployersArray& empls, FoundedeEmp& fe);
-void ShowEmployersBySurnameLetter(EmployersArray& empls, FoundedeEmp& fe);
+void ShowEmployersGivenAge(EmployersArray& empls, EmployeTemp& empl, FoundedeEmp& fe);
+void ShowEmployersBySurnameLetter(EmployersArray& empls, EmployeTemp& empl, FoundedeEmp& fe);
 
+char InputLetter();
 
 void SaveFoundedInfo(FoundedeEmp& empls);
+
+void DeleteFoundedEmp(FoundedeEmp& fe);
+void ShowFoundedEmpl(FoundedeEmp& fe);

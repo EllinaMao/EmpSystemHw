@@ -2,6 +2,7 @@
 #include <conio.h>  
 #include "Employers.h"  
 #include "Employers system array.h"
+#include "FindEmployers.h"
 #include "menu.h"
 using namespace std;  
 /*
@@ -26,6 +27,7 @@ int main()
     int index = 0;
     EmployeTemp empl;
     EmployersArray emplarr;
+    FoundedeEmp fe;
 
     task = GetNumber();
 
@@ -57,8 +59,8 @@ int main()
         if (task == 1) //1. Show Employers
         {
             MenuShow();
-            GetNumber();
-
+            task = GetNumber();
+            
             if (task == 1) //Show all Employers
             {
                 cout << "Displaying all employers: " << endl;
@@ -66,15 +68,33 @@ int main()
             }
             else if (task == 2)//Show Employers by exact age
             {
-                continue;
+                cout << "Displaying employers by exact age: " << endl;
+                EnterAge(empl);
+                ShowEmployersGivenAge(emplarr, empl, fe);
+
+                MenuFound();
+                task = GetNumber();
+                if (task == 1) {
+                    SaveFoundedInfo(fe);
+                }
+                else { cout << "Returning to the menu" << endl; }
             }
             else if (task == 3) //Show Employers whose surname starts with a specific letter
             {
-                continue;
+                cout << "Displaying employers whose surname starts with a specific letter: " << endl;
+                ShowEmployersBySurnameLetter(emplarr, empl, fe);
 
+                MenuFound();
+                task = GetNumber();
+                if (task == 1) {
+                    SaveFoundedInfo(fe);
+                }
+                else { cout << "Returning to the menu" << endl; }
             }
             else if (task == 0) { continue; }
             else { cout << "Incorrect operation, retuning to the menu." << endl; }
+
+            
         }
 
         else if (task == 2) //Add Employer
@@ -90,7 +110,9 @@ int main()
         }
         else if (task == 4) //Search Employer by surname
         {
-            continue;
+            cout << "Enter surname: " << endl;
+            EnterSurname(empl);
+            FindEmployeSurname(emplarr, empl, fe);
         }
         else if (task == 5) //Change Employer by index
         {

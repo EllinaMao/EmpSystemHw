@@ -51,3 +51,11 @@ int GetNumber()
 	cin.clear(); cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return num;
 }
+
+void MenuFound()
+{	cout << R"(
+You want to save in txt file?
+1. Yes
+2. No
+)" << endl;
+}
