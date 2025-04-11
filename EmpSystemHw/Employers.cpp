@@ -16,6 +16,7 @@ void EnterName(EmployeTemp& et)
 {
 	if (et.name) {
 		delete[] et.name;
+		et.name = nullptr;
 	}
 
 	short tempsize = 50;
@@ -31,9 +32,9 @@ void EnterName(EmployeTemp& et)
 		temp[i] = tolower(temp[i]);
 	}
 
-	et.namesize = strlen(temp) + 1;
-	et.name = new char[et.namesize];
-	strcpy(et.name, temp);
+	int size = strlen(temp) + 1;
+	et.name = new char[size];
+	strcpy_s(et.name, size, temp);
 	delete[] temp;
 }
 
@@ -41,6 +42,7 @@ void EnterSurname(EmployeTemp& et)
 {
 	if (et.surname) {
 		delete[] et.surname;
+		et.surname = nullptr;
 	}
 
 	short tempsize = 50;
@@ -56,9 +58,9 @@ void EnterSurname(EmployeTemp& et)
 		temp[i] = tolower(temp[i]);
 	}
 
-	et.surnamesize = strlen(temp) + 1;
-	et.surname = new char[et.surnamesize];
-	strcpy(et.surname, temp);
+	int size = strlen(temp) + 1;
+	et.surname = new char[size];
+	strcpy_s(et.surname, size,temp);
 	delete[] temp;
 }
 
@@ -70,8 +72,8 @@ void EnterAge(EmployeTemp& et)
 
 void ShowEmploye(EmployeTemp& et)
 {
-	cout << "Name" <<et.name<< endl;
-	cout << "Surname" << et.surname << endl;
-	cout << "Age" << et.age << endl;
+	cout << "Name: " <<et.name<< endl;
+	cout << "Surname: " << et.surname << endl;
+	cout << "Age: " << et.age << endl;
 
 }

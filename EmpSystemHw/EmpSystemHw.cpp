@@ -18,47 +18,116 @@ using namespace std;
 Организуйте возможность сохранения найденной информации в файл.
 */
 
-int main()  
-{  
-    char inFile[] = "employers_data.txt";  
-    FILE* empsys = nullptr;
-    cout << "Welcome to the Employer System" << endl;  
+int main()
+{
+    cout << "Welcome to the Employers System!" << endl;
+    EnterMenu();
     int task = 0;
+    int index = 0;
     EmployeTemp empl;
     EmployersArray emplarr;
-    while (true){
+
+    task = GetNumber();
+
+    while (true) {
+        if (task == 1) {
+            cout << "Enter new file name" << endl;
+            EnterFilename(emplarr);
+            break;
+        }
+
+        else if (task == 2) {
+            cout << "Enter your file name" << endl;
+            //EnterFilename(emplarr);
+            SetTestFilename(emplarr);//for tests
+            LoadFromFile(emplarr);
+            break;
+        }
+        else{
+            cout << "Wrong operation, try again" << endl;
+        }
+    }
+
+
+    while (true) {
 
         Menu();
-        cout << "Enter your choice: ";
-        cin >> task;
+        task = GetNumber();
 
+        if (task == 1) //1. Show Employers
+        {
+            MenuShow();
+            GetNumber();
 
-        if (task == 1) {
+            if (task == 1) //Show all Employers
+            {
+                cout << "Displaying all employers: " << endl;
+                ShowAllEmployers(emplarr);
+            }
+            else if (task == 2)//Show Employers by exact age
+            {
+                continue;
+            }
+            else if (task == 3) //Show Employers whose surname starts with a specific letter
+            {
+                continue;
+
+            }
+            else if (task == 0) { continue; }
+            else { cout << "Incorrect operation, retuning to the menu." << endl; }
         }
-        else if (task == 1) {
+
+        else if (task == 2) //Add Employer
+        {
+            cout << "Adding employer" << endl;
+            AddEmploye(emplarr);
         }
-        else if (task == 2) {
+        else if (task == 3) //Remove Employer
+        {
+            cout << "Please enter index of employer what you want to remove: " << endl;
+            index = GetNumber();
+            DeleteEmployeByIndex(emplarr, index);
         }
-        else if (task == 3) {
+        else if (task == 4) //Search Employer by surname
+        {
+            continue;
         }
-        else if (task == 4) {
+        else if (task == 5) //Change Employer by index
+        {
+            MenuChange();
+            task = GetNumber();
+            cout << "Please enter index of employer what you want to change: " << endl;
+            index = GetNumber();
+            if (task == 1) // Change Employer name
+            {
+                ChangeEmployeNameByIndex(emplarr, empl, index);
+            }
+            else if (task == 2)//Change Employer surname
+            {
+                ChangeEmployeSurnameByIndex(emplarr, empl, index);
+            }
+            else if (task == 3) //Change Employer age
+            {
+                ChangeEmployeAgeByIndex(emplarr, empl, index);
+            }
+            else if (task == 0) { continue; }
+            else { cout << "Incorrect operation, retuning to the menu." << endl; }
         }
-        else if (task == 5) {
+        else if (task == 6) //Display Employers Count
+        {
+            cout<<"Employers count: " << emplarr.employers_count << endl;
         }
-        else if (task == 6) {
+        else if (task == 7) //Save Data
+        {
+            SaveInFile(emplarr);
         }
-        else if (task == 7) {
-        }
-        else if (task == 8) {
-        }
-        else if (task == 0) {
-            cout << "Exit program and saving data" << endl;
+        else if (task == 0) //exit
+        {
+            cout << "Exit program and saving data." << endl;
             SaveInFile(emplarr);
             break;
         }
-        else {
-            cout << "Try again" << endl;
-        }
-
-  return 0;  
+        else { cout << "Incorrect operation. Try again." << endl; }
+    }
+    return 0;
 }

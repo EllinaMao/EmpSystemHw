@@ -10,6 +10,7 @@
 
 struct FoundedeEmp {
 	EmployeTemp** all_empl = nullptr;
+	int* emp_id = nullptr;
 	int employers_count = 0;
 };
 

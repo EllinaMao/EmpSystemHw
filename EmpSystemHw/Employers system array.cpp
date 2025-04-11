@@ -1,10 +1,9 @@
 #include "Employers system array.h"
 
-void AddEmploye(EmployersArray& empls, EmployeTemp* /*empl*/)
+void AddEmploye(EmployersArray& empls)
 {
     EmployeTemp* new_employer = new EmployeTemp;
-    EnterEmploye(*new_employer); // func to allocate empl
-
+    EnterEmploye(*new_employer);
     int new_count = empls.employers_count + 1;
 
     EmployeTemp** temp = new EmployeTemp * [new_count];
@@ -64,8 +63,9 @@ void ChangeEmployeNameByIndex(EmployersArray& empls, EmployeTemp& empl, int inde
     EnterName(empl);
 
     delete[] empls.all_empl[index]->name;
-    empls.all_empl[index]->name = new char[empl.namesize];
-    strcpy_s(empls.all_empl[index]->name, empl.namesize, empl.name);  
+    int size = strlen(empl.name) + 1;
+    empls.all_empl[index]->name = new char[size];
+    strcpy_s(empls.all_empl[index]->name, size, empl.name);
     }
 
 void ChangeEmployeSurnameByIndex(EmployersArray& empls, EmployeTemp& empl, int index)
@@ -78,8 +78,9 @@ void ChangeEmployeSurnameByIndex(EmployersArray& empls, EmployeTemp& empl, int i
     EnterSurname(empl);
 
     delete[] empls.all_empl[index]->surname;
-    empls.all_empl[index]->surname = new char[empl.surnamesize];
-    strcpy_s(empls.all_empl[index]->surname, empl.surnamesize, empl.surname);
+    int size = strlen(empl.surname) + 1;
+    empls.all_empl[index]->surname = new char[size];
+    strcpy_s(empls.all_empl[index]->surname, size, empl.surname);
 }
 
 void ChangeEmployeAgeByIndex(EmployersArray& empls, EmployeTemp& empl, int index)  
@@ -96,8 +97,10 @@ void ChangeEmployeAgeByIndex(EmployersArray& empls, EmployeTemp& empl, int index
 
 void SaveInFile(EmployersArray& empls)
 {
-    FILE* outFile = fopen("employers.dat", "wb");
-
+    FILE* outFile = nullptr;
+    fopen_s(&outFile, empls.filename, "wb");
+    size_t name_length = 0;
+    size_t surname_length = 0;
     if (!outFile) {
         cout << "File could not be opened!" << endl;
         return;
@@ -106,10 +109,18 @@ void SaveInFile(EmployersArray& empls)
     fwrite(&empls.employers_count, sizeof(int), 1, outFile);
     for (int i = 0; i < empls.employers_count; i++) {
         EmployeTemp* empl = empls.all_empl[i];
-        fwrite(&empl->namesize, sizeof(int), 1, outFile);
-        fwrite(empl->name, sizeof(char), empl->namesize, outFile);
-        fwrite(&empl->surnamesize, sizeof(int), 1, outFile);
-        fwrite(empl->surname, sizeof(char), empl->surnamesize, outFile);
+
+        // Write name
+        name_length = strlen(empl->name) + 1;
+        fwrite(&name_length, sizeof(int), 1, outFile); // Save name length
+        fwrite(empl->name, sizeof(char), name_length, outFile);
+
+        // Write surname
+        surname_length = strlen(empl->surname) + 1;
+        fwrite(&surname_length, sizeof(int), 1, outFile); // Save surname length
+        fwrite(empl->surname, sizeof(char), surname_length, outFile);
+
+        // Write age
         fwrite(&empl->age, sizeof(int), 1, outFile);
     }
 
@@ -119,34 +130,93 @@ void SaveInFile(EmployersArray& empls)
 
 void LoadFromFile(EmployersArray& empls)
 {
-    FILE* inFile = fopen("employers.dat", "rb");
+    FILE* inFile = nullptr;
+    fopen_s(&inFile, empls.filename, "rb");
 
     if (!inFile) {
-        cout << "File could not be opened!" << endl;
+        cout << "File could not be opened! Program will start empty." << endl;
         return;
     }
 
+    // Read the number of employers
     fread(&empls.employers_count, sizeof(int), 1, inFile);
+    if (empls.employers_count <= 0) {
+        cout << "Invalid employers count in file! Program will start empty." << endl;
+        fclose(inFile);
+        return;
+    }
+
+    // Allocate memory for employers
     EmployeTemp** temp_employers = new EmployeTemp * [empls.employers_count];
 
     for (int i = 0; i < empls.employers_count; i++) {
         EmployeTemp* new_employer = new EmployeTemp;
 
-        fread(&new_employer->namesize, sizeof(int), 1, inFile);
-        new_employer->name = new char[new_employer->namesize];
-        fread(new_employer->name, sizeof(char), new_employer->namesize, inFile);
+        // Read name
+        int name_length = 0;
+        fread(&name_length, sizeof(int), 1, inFile);
+        if (name_length <= 0) {
+            cout << "Invalid name length in file!" << endl;
+            delete new_employer;
+            continue;
+        }
+        new_employer->name = new char[name_length];
+        fread(new_employer->name, sizeof(char), name_length, inFile);
 
-        fread(&new_employer->surnamesize, sizeof(int), 1, inFile);
-        new_employer->surname = new char[new_employer->surnamesize];
-        fread(new_employer->surname, sizeof(char), new_employer->surnamesize, inFile);
+        // Read surname
+        int surname_length = 0;
+        fread(&surname_length, sizeof(int), 1, inFile);
+        if (surname_length <= 0) {
+            cout << "Invalid surname length in file!" << endl;
+            delete[] new_employer->name;
+            delete new_employer;
+            continue;
+        }
+        new_employer->surname = new char[surname_length];
+        fread(new_employer->surname, sizeof(char), surname_length, inFile);
 
+        // Read age
         fread(&new_employer->age, sizeof(int), 1, inFile);
 
         temp_employers[i] = new_employer;
     }
 
+    // Clean up old data and assign new data
     delete[] empls.all_empl;
     empls.all_empl = temp_employers;
 
     fclose(inFile);
+    return;
+}
+
+void EnterFilename(EmployersArray& empls)
+{
+    short tempsize = 50;
+    char* temp = new char[tempsize];
+
+    cin.getline(temp, tempsize);
+    if (cin.fail()) { cin.clear(); cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); }
+
+    int size = strlen(temp) + 1;
+    empls.filename = new char[size];
+    strcpy_s(empls.filename, size, temp);
+    delete[] temp;
+}
+
+void SetTestFilename(EmployersArray& empls)
+{
+    const char* default_filename = "employers.dat";  
+    size_t length = (strlen(default_filename) + 1);
+    empls.filename = new char[length];  
+    strcpy_s(empls.filename, length, default_filename);  
+}
+
+EmployersArray::~EmployersArray()
+{
+    for (int i = 0; i < employers_count; ++i) {
+        delete all_empl[i];
+    }
+    delete[] all_empl;
+
+    delete[] filename;
 }
